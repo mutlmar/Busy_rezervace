@@ -1,3 +1,4 @@
+const path = require("path");
 app.get('/', (req, res) => {
   res.send('Welcome to the bus booking service!'); // Můžete zde vrátit například text nebo hlavní HTML stránku.
 });
@@ -19,6 +20,11 @@ app.use("/api/buses", require("./routes/busesRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/bookings", require("./routes/bookingsRoutes"));
 app.use("/api/cities", require("./routes/citiesRoutes"));
+app.use(express.static(path.join(__dirname, "client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
 
 // listen to port
 app.listen(port, () => {
