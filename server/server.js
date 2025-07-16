@@ -1,3 +1,4 @@
+console.log("Starting server...");
 app.get('/', (req, res) => {
   res.send('Welcome to the bus booking service!'); // Můžete zde vrátit například text nebo hlavní HTML stránku.
 });
