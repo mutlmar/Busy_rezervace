@@ -28,6 +28,15 @@ app.use("/api/bookings", require("./routes/bookingsRoutes"));
 app.use("/api/cities", require("./routes/citiesRoutes"));
 
 // Start serveru
+const path = require("path");
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "../client/build")));
+
+// Catch-all handler: return React's index.html for any unknown route
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
