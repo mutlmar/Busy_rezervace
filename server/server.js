@@ -1,3 +1,7 @@
+app.get('/', (req, res) => {
+  res.send('Welcome to the bus booking service!'); // Můžete zde vrátit například text nebo hlavní HTML stránku.
+});
+
 const express = require("express");
 const app = express();
 require("dotenv").config();
