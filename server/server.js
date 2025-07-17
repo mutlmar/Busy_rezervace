@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 require("dotenv").config();
 const cors = require("cors");
@@ -15,6 +16,15 @@ app.use("/api/buses", require("./routes/busesRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/bookings", require("./routes/bookingsRoutes"));
 app.use("/api/cities", require("./routes/citiesRoutes"));
+
+// Serve frontend
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build", "index.html"));
+  });
+}
 
 // listen to port
 app.listen(port, () => {
